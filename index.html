@@ -1,8 +1,8 @@
 diff --git a/index.html b/index.html
-index c64ebde2685a4eec34aabef0c8a09ca7cef53704..b69cb414a31cc74152ffe65e2a673fa85165abe3 100644
+index c64ebde2685a4eec34aabef0c8a09ca7cef53704..5b3d29d06423b289041c6c4d376018e8cd2ae4f3 100644
 --- a/index.html
 +++ b/index.html
-@@ -1,118 +1,128 @@
+@@ -1,118 +1,173 @@
  <!doctype html>
  <html lang="pt-BR">
    <head>
@@ -20,8 +20,8 @@ index c64ebde2685a4eec34aabef0c8a09ca7cef53704..b69cb414a31cc74152ffe65e2a673fa8
          <p>
 -          Pré-análise + análise completa para Google Meu Negócio, com checklist visual,
 -          ranking de concorrentes e plano de ação recorrente.
-+          Plataforma de diagnóstico e plano de crescimento para Google Meu Negócio,
-+          com benchmark competitivo e execução mensal.
++          Ferramenta de captação e diagnóstico para prospects de Google Meu Negócio,
++          com foco em prospecção ativa, qualificação e plano comercial.
          </p>
          <button id="install-app" class="secondary" hidden>Instalar no Android</button>
        </div>
@@ -30,31 +30,74 @@ index c64ebde2685a4eec34aabef0c8a09ca7cef53704..b69cb414a31cc74152ffe65e2a673fa8
      <main class="wrap layout">
        <section class="card">
 -        <h2>1) Dados do negócio</h2>
-+        <h2>1) Dados estratégicos</h2>
++        <h2>1) Captação do prospecto</h2>
          <form id="gmn-form">
++          <h3>Dados principais</h3>
            <div class="grid">
              <label>Nome do negócio<input type="text" name="businessName" required /></label>
-             <label>Categoria principal<input type="text" name="category" required /></label>
+-            <label>Categoria principal<input type="text" name="category" required /></label>
++            <label>Nicho<input type="text" name="niche" placeholder="Ex.: dentista, advogado, estética" required /></label>
              <label>Cidade / Região<input type="text" name="region" required /></label>
-             <label>URL do perfil<input type="url" name="profileUrl" placeholder="https://" /></label>
+-            <label>URL do perfil<input type="url" name="profileUrl" placeholder="https://" /></label>
++            <label>Nome do decisor<input type="text" name="decisionMaker" required /></label>
++            <label>Canal de entrada
++              <select name="leadSource" required>
++                <option value="instagram">Instagram</option>
++                <option value="maps">Busca ativa no Google Maps</option>
++                <option value="indicacao">Indicação</option>
++                <option value="whatsapp">WhatsApp</option>
++              </select>
++            </label>
++            <label>Canal preferido de contato
++              <select name="contactChannel" required>
++                <option value="whatsapp">WhatsApp</option>
++                <option value="instagram">Instagram Direct</option>
++                <option value="phone">Ligação</option>
++                <option value="email">E-mail</option>
++              </select>
++            </label>
++          </div>
++
++          <h3>Estrutura comercial atual</h3>
++          <div class="grid">
++            <label>URL do perfil GMN<input type="url" name="profileUrl" placeholder="https://" /></label>
              <label>Status de verificação
                <select name="verificationStatus">
                  <option value="verified">Verificado</option>
                  <option value="notVerified">Não verificado</option>
                </select>
              </label>
-             <label>Tipo de análise
-               <select name="analysisMode">
-                 <option value="pre">Pré-análise (prospecção)</option>
-                 <option value="complete">Análise completa (cliente ativo)</option>
+-            <label>Tipo de análise
+-              <select name="analysisMode">
+-                <option value="pre">Pré-análise (prospecção)</option>
+-                <option value="complete">Análise completa (cliente ativo)</option>
++            <label>Tem website?
++              <select name="hasWebsite">
++                <option value="yes">Sim</option>
++                <option value="no">Não</option>
++              </select>
++            </label>
++            <label>Tem rastreamento (GA4/Tag Manager)?
++              <select name="hasTracking">
++                <option value="yes">Sim</option>
++                <option value="no">Não</option>
                </select>
              </label>
++            <label>Orçamento mensal de marketing (R$)
++              <select name="marketingBudget">
++                <option value="0">Até 500</option>
++                <option value="1">500 a 2.000</option>
++                <option value="2">2.000 a 5.000</option>
++                <option value="3">Acima de 5.000</option>
++              </select>
++            </label>
++            <label>Urgência do prospect (0-10)<input type="number" min="0" max="10" name="urgency" value="7" required /></label>
            </div>
  
 -          <h3>2) Checklist visual (0 a 10)</h3>
 -          <p class="muted">Estratégia orientada por categorias, avaliações, postagens e gestão recorrente.</p>
-+          <h3>2) Checklist técnico (0 a 10)</h3>
-+          <p class="muted">Pontue o nível atual de execução em cada pilar local.</p>
++          <h3>2) Checklist GMN (0 a 10)</h3>
++          <p class="muted">Baseado nos fatores mais recorrentes de ranqueamento local e conversão.</p>
            <div class="grid">
              <label>Perfil completo<input type="number" min="0" max="10" name="profileCompleteness" value="6" required /></label>
              <label>Categorias corretas<input type="number" min="0" max="10" name="categories" value="5" required /></label>
@@ -77,7 +120,8 @@ index c64ebde2685a4eec34aabef0c8a09ca7cef53704..b69cb414a31cc74152ffe65e2a673fa8
 +            <label>Média de avaliações dos TOP 10<input type="number" min="0" name="competitorReviewsAvg" value="92" required /></label>
            </div>
  
-           <button type="submit">Gerar laudo estratégico</button>
+-          <button type="submit">Gerar laudo estratégico</button>
++          <button type="submit">Gerar laudo + roteiro comercial</button>
          </form>
        </section>
  
@@ -85,7 +129,8 @@ index c64ebde2685a4eec34aabef0c8a09ca7cef53704..b69cb414a31cc74152ffe65e2a673fa8
          <h2>Resultado do laudo</h2>
          <div class="kpi-grid">
            <article class="kpi">
-             <span>Score Geral</span>
+-            <span>Score Geral</span>
++            <span>Score GMN</span>
              <strong id="overall-score">0</strong>
              <small>/ 100</small>
            </article>
@@ -94,6 +139,11 @@ index c64ebde2685a4eec34aabef0c8a09ca7cef53704..b69cb414a31cc74152ffe65e2a673fa8
              <strong id="priority-score">-</strong>
              <small id="priority-text">-</small>
            </article>
++          <article class="kpi">
++            <span>Fit comercial</span>
++            <strong id="fit-score">-</strong>
++            <small id="fit-text">-</small>
++          </article>
            <article class="kpi">
              <span>Gap competitivo</span>
              <strong id="competitor-gap">-</strong>
@@ -109,15 +159,19 @@ index c64ebde2685a4eec34aabef0c8a09ca7cef53704..b69cb414a31cc74152ffe65e2a673fa8
          <p id="maturity-level"></p>
  
 -        <h3>Checklist visual por pilar</h3>
+-        <ul id="checklist-list" class="clean-list"></ul>
 +        <h3>Radar dos pilares</h3>
 +        <ul id="pillar-bars" class="clean-list"></ul>
 +
-+        <h3>Checklist visual</h3>
-         <ul id="checklist-list" class="clean-list"></ul>
- 
 +        <h3>Top prioridades (próximos 15 dias)</h3>
 +        <ol id="priority-actions"></ol>
 +
++        <h3>Dados críticos faltantes na captação</h3>
++        <ul id="data-gaps" class="clean-list"></ul>
++
++        <h3>Roteiro de abordagem</h3>
++        <p id="approach-script" class="script-box"></p>
+ 
          <h3>Plano de ação (30 dias)</h3>
          <ol id="action-plan"></ol>
  
@@ -134,7 +188,7 @@ index c64ebde2685a4eec34aabef0c8a09ca7cef53704..b69cb414a31cc74152ffe65e2a673fa8
  
      <footer>
 -      <small>Versão final otimizada para Android (PWA): instale na tela inicial para uso rápido com clientes.</small>
-+      <small>Ferramenta inspirada em fluxos de auditoria de marketing local, otimizada para uso em reuniões e prospecção.</small>
++      <small>Fluxo recomendado para prospecção: identificar nicho, mapear dor, diagnosticar perfil GMN e apresentar plano de 30 dias.</small>
      </footer>
  
      <script src="logic.js"></script>
@@ -143,4 +197,4 @@ index c64ebde2685a4eec34aabef0c8a09ca7cef53704..b69cb414a31cc74152ffe65e2a673fa8
 -        </html>
 -                                               
 +</html>
-   
+  
